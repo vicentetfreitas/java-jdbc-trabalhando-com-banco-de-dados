@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+H:\Cursos\alura\Formação Spring Framework\ws-java-jdbc-trabalhando-com-banco-de-dados\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+1107504888.index
+1602128660.index
