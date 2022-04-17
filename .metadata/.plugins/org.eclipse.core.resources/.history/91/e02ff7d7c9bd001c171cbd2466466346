@@ -1,0 +1,24 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+public class TestaListagem {
+
+	public static void main(String[] args) throws SQLException {
+
+		/*Criando instância de conexão com banco de dados*/
+		Connection con = DriverManager.getConnection(
+				"jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC", "root", "@dmin");
+
+		Statement stm = con.createStatement();
+		
+		boolean resultados = stm.execute("SELECT * FROM produto");
+
+		/*Fechando instância de conexão com banco de dados;*/
+		con.close();
+
+	}
+
+}

@@ -1,0 +1,10 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class TestaListagem {
+
+	public Connection recuperarConexao() throws SQLExceptionO {
+		Connection con = DriverManager.getConnection("","","");
+	}
+
+}

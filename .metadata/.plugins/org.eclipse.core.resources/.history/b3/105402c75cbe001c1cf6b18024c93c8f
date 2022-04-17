@@ -1,0 +1,25 @@
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mysql.cj.protocol.Resultset;
+
+public class TestaInsercao {
+
+	public static void main(String[] args) throws SQLException {
+
+		ConnectionFactory cf = new ConnectionFactory();
+		Connection con = cf.recuperarConexao();
+
+		Statement stm = con.createStatement();
+		/* Statement retorna um boleano que para INSERT tem valor falso */
+		// boolean resultado =
+		stm.execute("INSERT INTO produto (nome, descricao) VALUES ('MOUSE', 'MOUSE SEM FIO')",
+				Statement.RETURN_GENERATED_KEYS);
+		
+		Resultset rst = stm.getGeneratedKeys();
+
+		System.out.println();
+	}
+
+}

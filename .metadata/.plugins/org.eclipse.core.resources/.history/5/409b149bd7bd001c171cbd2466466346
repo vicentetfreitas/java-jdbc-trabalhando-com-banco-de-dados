@@ -1,0 +1,36 @@
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class CriarConexao {
+
+	public static void main(String[] args) throws SQLException {
+
+		/*Cria conexão com banco de dados*/
+		CriarConexao criaConexao = new CriarConexao();
+		Connection con = criaConexao.recuperarConexao();
+
+		/*Cria um objeto para instanciar consultas no BD*/
+		Statement stm = con.createStatement();
+		stm.execute("SELECT * FROM produto");
+		
+		/*Recebe uma consulta do BD*/
+		ResultSet rst = stm.getResultSet();
+		
+		/*Percorre a consulta e mostra o resultado*/
+		while(rst.next()) {
+			Integer id = rst.getInt("id");
+			System.out.println(id);
+			String nome = rst.getString("nome");
+			System.out.println(nome);
+			String descricao = rst.getString("descricao");
+			System.out.println(descricao);
+		}
+
+		/*Fechando instância de conexão com banco de dados;*/
+		con.close();
+
+	}
+
+}
