@@ -3,10 +3,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class TestaInsercao {
+public class TestaInsercaoComParametro {
 
 	public static void main(String[] args) throws SQLException {
 
+		String nome = "Mouse'";
+		String descricao = "Mouse sem fio); delete from produto";
+		ConnectionFactory cf = new ConnectionFactory();
 		ConnectionFactory factory = new ConnectionFactory();
 		Connection connection = factory.recuperarConexao();
 
@@ -24,3 +27,4 @@ public class TestaInsercao {
 		connection.close();
 	}
 }
+

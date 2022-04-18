@@ -1,38 +1,28 @@
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TestaListagem {
 
 	public static void main(String[] args) throws SQLException {
 
-		/*Cria conexão com banco de dados*/
+		ConnectionFactory connectionFactory = new ConnectionFactory();
+		Connection connection = connectionFactory.recuperarConexao();
 
-		ConnectionFactory cf = new ConnectionFactory();
-		Connection con = cf.recuperarConexao();
-		
-		/*Cria um objeto para instanciar consultas no BD*/
-		Statement stm = con.createStatement();
-		/*Statement retorna um booleano que para lista tem valor true*/
-		stm.execute("SELECT * FROM produto");
-		
-		/*Recebe uma consulta do BD*/
+		PreparedStatement stm = connection.prepareStatement("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
+		stm.execute();
 		ResultSet rst = stm.getResultSet();
-		
-		/*Percorre a consulta e mostra o resultado*/
 		while(rst.next()) {
-			Integer id = rst.getInt("id");
+			Integer id = rst.getInt("ID");
+			String nome = rst.getString("NOME");
+			String descricao = rst.getString("DESCRICAO");
 			System.out.println(id);
-			String nome = rst.getString("nome");
 			System.out.println(nome);
-			String descricao = rst.getString("descricao");
 			System.out.println(descricao);
 		}
-
-		/*Fechando instância de conexão com banco de dados;*/
-		con.close();
-
+		rst.close();
+		stm.close();
+		connection.close();
 	}
-
 }

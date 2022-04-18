@@ -1,0 +1,40 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class TestaListagem {
+
+	public static void main(String[] args) throws SQLException {
+
+		/*Cria conexão com banco de dados*/
+
+		ConnectionFactory cf = new ConnectionFactory();
+		Connection con = cf.recuperarConexao();
+		
+		/*Cria um objeto para instanciar consultas no BD*/
+		PreparedStatement pstm = con.prepareStatement("SELECT * FROM produto");
+		
+		/*Statement retorna um booleano que para lista tem valor true*/
+		pstm.setInt(1, 2);
+		pstm.execute();
+		
+		/*Recebe uma consulta do BD*/
+		ResultSet rst = pstm.getResultSet();
+		
+		/*Percorre a consulta e mostra o resultado*/
+		while(rst.next()) {
+			Integer id = rst.getInt("id");
+			System.out.println(id);
+			String nome = rst.getString("nome");
+			System.out.println(nome);
+			String descricao = rst.getString("descricao");
+			System.out.println(descricao);
+		}
+
+		/*Fechando instância de conexão com banco de dados;*/
+		con.close();
+
+	}
+
+}
